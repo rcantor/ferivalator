@@ -28,7 +28,7 @@
         margin:25px auto;
     }
     
-    form {
+    form, .time_needed {
         background: linear-gradient(#4a4a4a, #1c1c1c); /* Standard syntax */
         color:#fff;
         border-radius: 10px;
@@ -105,6 +105,98 @@
     .computation {
         display:none;
     }
+    
+    .weeks_content div {
+        display:inline-block;
+    }
+    
+    .weeks_content .div1 {
+        width:25%;
+        text-align: right;
+    } 
+    
+    .weeks_content .div5 {
+        width:23%;
+    } 
+    
+    /*weeks_content span {
+        display:inline-block;
+    }*/
+    
+    #weeksTargetHb, #weeksIronStores {
+        width: 133px;
+        height: 133px;
+        background: url('https://www.feriva21-7.com/wp-content/uploads/2017/05/round_logo.png') top center no-repeat;
+        margin: 0px 10px;
+        text-align: center;
+        color:#000;
+        display: inline;
+        border:0px;
+        vertical-align: middle;
+    }
+    
+    
+    .time_needed {
+        text-align: center;
+        font-weight: bold;
+        line-height: 40px;
+    }
+    
+    .time_needed p {
+        display: inline-block;
+    }
+    
+    .divider {
+        color: #eb9a2f;
+        display: inline-block;
+        width:10px;
+        height:40px;
+        border-left:1px solid #eb9a2f;
+    }
+    
+    #months, #weeks3 {
+        width: 63px;
+        height: 44px;
+        border-radius: 10px;
+        margin: 0px 10px;
+        text-align: center;
+        background:#fff;
+        color:#000;
+        display: inline-block;
+    }
+    
+    @media all and (max-width: 667px) {
+        .fv_inside_container {
+            text-align: center !important;
+        }
+        .fv_inside_container label {
+            display: block !important;
+            text-align:center !important;
+            width: 100%;
+        }
+        
+        .fv_inside_container input[type="text"] {
+            display: block !important;
+            margin:0 auto !important;
+        }
+        .fifty {
+            width:45%;
+        }
+        
+        .weeks_content div {
+            display:block !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+        
+        .time_needed p {
+            display:block;
+        }
+        
+        .divider {
+            display: none !important;
+        }
+    }
 </style>
 <div class="fv_container">
     <div class="fv_inside_container">
@@ -130,7 +222,21 @@
         </div>
         <div style="clear:both"></div>
         
+        <div class="weeks_content">
+          <div class="div1"><p>Estimated weeks to target Hb</p></div>
+          <div class="div2"><input type="text" id="weeksTargetHb" readonly></div>
+          <div class="div3"><p>+</p></div>
+          <div class="div4"><input type="text" id="weeksIronStores" readonly></div>
+          <div class="div5"><p>Estimated additional weeks to replenish Iron stores</p> </div>
+            <div style="clear:both"></div>
+        </div>
+        
+        
         <h1>Total Time Needed for FeRiva 21/7™ Therapy</h1>
+        <div class="time_needed">
+            <p>Months <input type="text" id="months" readonly value=""></p> <div class="divider">&nbsp;</div> <p>Weeks <input type="text" id="weeks3" readonly value=""></p>
+        </div>
+        
         </div>
     </div>
 </div>
@@ -179,13 +285,13 @@
         }
 
     $("#ironNeeded").text(ironNeeded);
-    $("#weeksTargetHb").text(weeksTargetHb);
+    $("#weeksTargetHb").val(weeksTargetHb);
         
         
         var val2 = $('.ferritin').val();
     
     if (val2 < 5) {
-        var ironNeeded2 = "400";
+        var ironNeeded2 = "375";
         var weeksIronStores = "4";
     } else if (val2 == 5) {
         var ironNeeded2 = "375";
@@ -220,7 +326,15 @@
     }
         
 $("#ironNeeded2").text(ironNeeded2); 
-("#weeksIronStores").text(weeksIronStores);  
+$("#weeksIronStores").val(weeksIronStores);  
+        
+        var weeks1 = parseInt(weeksTargetHb);
+        var weeks2 = parseInt(weeksIronStores);
+        var months = Math.floor((weeks1 + weeks2) / 4);
+        var weeks3 = (weeks1 + weeks2) % 4;
+        
+        $("#months").val(months); 
+        $("#weeks3").val(weeks3); 
         
         
     });
