@@ -1,0 +1,822 @@
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<style>
+    html, body {
+        margin:0px !important;
+        padding:0px;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    
+    h1 {
+        color: #BC2325;
+        font-size: 28px;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+        padding: 25px 0 10px;
+        line-height: 30px;
+        text-align: center;
+    }
+    
+    h2 {
+        color: #BC2325;
+        font-size: 28px;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+        padding: 35px 0 15px;
+        line-height: 20px;
+        text-align: center;
+    }
+    
+    h2.script_refill_title {
+        padding: 35px 0 0;
+        line-height: 10px;
+    }
+    
+    .fv_container {
+        background: #ebebeb;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .fv_inside_container {
+        max-width:760px;
+        margin:25px auto;
+    }
+    
+    form {
+        background: linear-gradient(#4a4a4a, #1c1c1c); /* Standard syntax */
+        color:#fff;
+        border-radius: 10px;
+        max-width: 365px;
+        margin:0 auto;
+        padding:20px;
+    }
+    
+    label {
+        width: 190px;
+        display: inline-block;
+        text-align: right;
+    }
+    
+    input[type="text"] {
+        width: 63px;
+        height: 44px;
+        border-radius: 10px;
+        margin: 0px 10px;
+        text-align: center;
+        font-size:15px;
+    }
+    
+    .submit {
+        text-align: center;
+    }
+    
+    input[type='submit'], .button {
+        border: none;
+        background: #e41a21;
+        background-image: -webkit-linear-gradient(top, #e41a21, #91090b);
+        background-image: -moz-linear-gradient(top, #e41a21, #91090b);
+        background-image: -ms-linear-gradient(top, #e41a21, #91090b);
+        background-image: -o-linear-gradient(top, #e41a21, #91090b);
+        background-image: linear-gradient(to bottom, #e41a21, #91090b);
+        -webkit-border-radius: 6;
+        -moz-border-radius: 6;
+        border-radius: 6px;
+        -webkit-box-shadow: 2px 2px 5px #000;
+        -moz-box-shadow: 2px 2px 5px #000;
+        box-shadow: 2px 2px 5px #000;
+        color: #ffffff;
+        padding: 8px 20px !important;
+        text-decoration: none;
+        font-size: 15px !important;
+        width: 100% !important;
+        max-width: 140px !important;
+        text-align: center;
+        cursor: pointer;
+        font-weight: 600 !important;
+        margin: 0 auto;
+}
+    
+    input[type='submit']:hover, .button:hover {
+	text-decoration: none;
+	color:#fcb713;
+	-webkit-box-shadow: 0px 0px 5px #666666;
+	-moz-box-shadow: 0px 0px 5px #666666;
+	box-shadow: 0px 0px 5px #666666;
+}
+    
+    .left {
+        font-weight:bold;
+        text-align:right;
+        padding-right:10px;
+        float:left;
+    }
+    
+    .right {
+        text-align:left;
+        padding-left:10px;
+        float:right;
+    }
+    
+    .fifty {
+        width:47%;
+    }
+    
+    #ironNeeded, #ironNeeded2 {
+        color:#e99c2e;
+    }
+    
+    .computation {
+        display:none;
+    }
+    
+    .weeks_content div {
+        display:inline-block;
+    }
+    
+    .weeks_content .div1 {
+        width:25%;
+        text-align: right;
+    } 
+    
+    .weeks_content .div5 {
+        width:23%;
+    } 
+    
+    /*weeks_content span {
+        display:inline-block;
+    }*/
+    
+    .div1, .div3, .div5 {
+        height: 133px;
+        float:left;
+        position: relative;
+    }
+    
+    .div1 {
+        margin-right:5px;
+    }
+    
+    .div3 {
+        padding:0 15px;
+        text-align: center !important;
+    }
+    
+    .div5 {
+        margin-left:5px;
+    }
+    
+    .div1 p, .div3 p, .div5 p {
+        margin: 0;
+       position: absolute;               /* 2 */
+       top: 50%;                         /* 3 */
+       transform: translate(0, -50%) }
+    }
+    
+    @keyframes rotate360 {
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes rotate3602 {
+      to { transform: rotate(-360deg); }
+    }
+    
+    .div2, .div4 {
+        background: url('https://www.feriva21-7.com/wp-content/uploads/2017/05/round_logo.png') top center no-repeat;
+        animation: 2s rotate360 1 linear; 
+        width: 133px;
+        height: 133px;
+        float:left;
+        margin:0 5px;
+        position:relative;
+    }
+    
+    #weeksTargetHb, #weeksIronStores {
+        
+        /*background: url('https://www.feriva21-7.com/wp-content/uploads/2017/05/round_logo.png') top center no-repeat;*/
+        text-align: center;
+        color:#000;
+        border:0;
+        animation: 2s rotate3602 1 linear; 
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-top:-22px;
+        margin-left:-31px;
+    }
+    
+    .time_needed, .script_refill {
+        background: linear-gradient(#4a4a4a, #1c1c1c); /* Standard syntax */
+        color:#fff;
+        border-radius: 10px;
+        max-width: 465px;
+        margin:0 auto;
+        padding:20px;
+        text-align: center;
+        font-weight: bold;
+        line-height: 40px;
+    }
+    
+    
+    .time_needed p, .script_refill p {
+        display: inline-block;
+    }
+    
+    .time_needed input[type="text"] {
+        width: 280px;
+    }
+    
+    .divider {
+        color: #eb9a2f;
+        display: inline-block;
+        width:10px;
+        height:40px;
+        border-left:1px solid #eb9a2f;
+    }
+    
+    
+    
+    #months, #weeks3 {
+        width: 63px;
+        height: 44px;
+        border-radius: 10px;
+        margin: 0px 10px;
+        text-align: center;
+        background:#fff;
+        color:#000;
+        display: inline-block;
+        
+    }
+    
+    .buttons_container {
+        text-align: center;
+        margin-top:25px;
+    }
+    
+    @media screen and (max-width: 667px) {
+        .fv_inside_container {
+            text-align: center !important;
+        }
+        .fv_inside_container label {
+            display: block !important;
+            text-align:center !important;
+            width: 100%;
+        }
+        
+        .fv_inside_container input[type="text"] {
+            display: block !important;
+            margin:0 auto !important;
+        }
+        .fifty {
+            width:45%;
+        }
+        
+        .weeks_content div {
+            display:block !important;
+            width: 100% !important;
+            text-align: center !important;
+            float:none !important;
+            height:40px;
+        }
+        
+        @keyframes rotate360 {
+          to { transform: rotate(360deg); }
+        }
+    
+        @keyframes rotate3602 {
+          to { transform: rotate(-360deg); }
+        }
+        
+        .weeks_content .div2, .weeks_content .div4 {
+            height: 133px;
+            animation: 2s rotate360 1 linear; 
+        }
+        
+        #weeksTargetHb, #weeksIronStores {
+        
+        /*background: url('https://www.feriva21-7.com/wp-content/uploads/2017/05/round_logo.png') top center no-repeat;*/
+        text-align: center;
+        color:#000;
+        border:0;
+        /*animation: 2s rotate3602 1 linear; */
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-top:-22px !important;
+        margin-left:-31px !important;
+    }
+        
+        .weeks_content .div3 {
+            padding: 0 5px !important;
+        }
+        
+        .weeks_content p {
+            position: relative !important;
+            text-align: center !important;
+        }
+        
+        .time_needed p {
+            display:block;
+        }
+        
+        .divider {
+            display: none !important;
+        }
+        
+        .time_needed input[type="text"] {
+            width: 100% !important;
+        }
+    }
+    
+    @media screen and (max-width: 414px) {
+        
+        h2, h2.script_refill_title {
+            line-height: 30px;
+        }
+        
+        .script_refill p {
+            display: block;
+        }
+
+    }
+    
+    @media print { 
+     /* All your print styles go here */
+        html,body{height:100%;width:100%;margin:0;padding:0;}
+        h1, h2 { font-size: 24px !important; } 
+        .fv_container {
+            padding: 5px;
+        }
+
+        .fv_inside_container {
+            margin:15px auto;
+        }
+        p {font-size:14px !important;}
+        .noprint {display: none !important;}
+        form, .time_needed, .script_refill {padding: 5px;}
+    }
+</style>
+<div class="fv_container">
+    <div class="fv_inside_container">
+        <form>
+        <p><label>Enter current Hb</label> <input type="text" class="hb" maxlength="3" required> g/dL</p>
+        <p><label>Enter current Ferritin</label> <input type="text" class="ferritin" maxlength="3" required> mcg/L</p>
+        <div class="submit"><input type="submit" class="button" value="CALCULATE"></div>
+        </form>
+        
+        <div class="computation">
+        <h1>FeRiva 21/7™ Therapy Plan</h1>
+        <p align="center" id="hbbanner" style="font-style:italic"></p>
+        <p align="center" id="ferbanner" style="font-style:italic"></p>
+        <div class="left fifty">
+            <p>Target Hb</p>
+            <p>Iron needed for Target Hb</p>
+            <p>Target Ferritin</p>
+            <p>Iron needed to replenish stores</p>
+        </div>
+        <div class="right fifty">
+            <p>12 g/dL</p>
+            <p><span id="ironNeeded"></span> mg</p>
+            <p>45 mcg/L</p>
+            <p><span id="ironNeeded2"></span> mg</p>
+        </div>
+        <div style="clear:both"></div>
+        
+        <div class="weeks_content">
+          <div class="div1"><p>Estimated weeks to target Hb</p></div>
+          <div class="div2"><input type="text" id="weeksTargetHb" readonly></div>
+          <div class="div3"><p>+</p></div>
+          <div class="div4"><input type="text" id="weeksIronStores" readonly></div>
+          <div class="div5"><p>Estimated additional weeks to replenish Iron stores</p> </div>
+            <div style="clear:both"></div>
+        </div>
+        
+        <div style="clear:both"></div>
+        <h2>Total Time Needed for FeRiva 21/7™ Therapy</h2>
+        <div class="time_needed">
+            <p>Total therapy = <input type="text" id="total_therapy" readonly value=""></p>
+        </div>
+        
+        <!-- <p class="noprint">&nbsp;</p> -->
+        <h2 class="script_refill_title">Script and Refill Recommendation</h2>
+        <p align="center"><i>Estimated duration of treatment has been rounded for script and refill recommendation purposes</i></p>
+        <div class="script_refill">
+            <p># of Prescriptions <input type="text" id="prescriptions" readonly value=""></p> <p># of Refills <input type="text" id="refills" readonly value=""></p>
+        </div>
+        
+        <h2 class="noprint">Save This Therapy Plan</h2>
+            <div class="buttons_container noprint">
+                <input type="button" class="button" value="Print" onClick="window.print()">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    
+    $('.button').click(function() {
+        event.preventDefault();
+        
+        
+        var val = $('.hb').val();
+        
+            if (val == "" || val.length == 0) {
+                alert("This field is required. Please enter your Hb");
+            } else {
+
+            if (val < 7) {
+                alert("Oral iron therapy is not appropriate for Hb below 7g/dL. Patient should be investigated for cause and blood transfusion or IV iron considered.");
+                var ironNeeded = "N/A";
+                var weeksTargetHb = "N/A";
+            } else if (val == 7) {
+                var ironNeeded = "1000";
+                var weeksTargetHb = "32";
+                alert("Oral iron therapy is not appropriate for Hb below 7 g/dL. Patient should be investigated for cause and blood transfusion for IV iron considered.");
+            } else if (val == 7.1) {
+                var ironNeeded = "985";
+                var weeksTargetHb = "28";
+            } else if (val == 7.2) {
+                var ironNeeded = "970";
+                var weeksTargetHb = "28";
+            } else if (val == 7.3) {
+                var ironNeeded = "955";
+                var weeksTargetHb = "28";
+            } else if (val == 7.4) {
+                var ironNeeded = "940";
+                var weeksTargetHb = "24";
+            } else if (val == 7.5) {
+                var ironNeeded = "925";
+                var weeksTargetHb = "24";
+            } else if (val == 7.6) {
+                var ironNeeded = "915";
+                var weeksTargetHb = "24";
+            } else if (val == 7.7) {
+                var ironNeeded = "905";
+                var weeksTargetHb = "24";
+            } else if (val == 7.8) {
+                var ironNeeded = "895";
+                var weeksTargetHb = "24";
+            } else if (val == 7.9) {
+                var ironNeeded = "885";
+                var weeksTargetHb = "20";
+            } else if (val == 8) {
+                var ironNeeded = "875";
+                var weeksTargetHb = "20";
+            } else if (val == 8.1) {
+                var ironNeeded = "850";
+                var weeksTargetHb = "20";
+            } else if (val == 8.2) {
+                var ironNeeded = "825";
+                var weeksTargetHb = "20";
+            } else if (val == 8.3) {
+                var ironNeeded = "800";
+                var weeksTargetHb = "20";
+            } else if (val == 8.4) {
+                var ironNeeded = "775";
+                var weeksTargetHb = "16";
+            } else if (val == 8.5) {
+                var ironNeeded = "750";
+                var weeksTargetHb = "16";
+            } else if (val == 8.6) {
+                var ironNeeded = "730";
+                var weeksTargetHb = "16";
+            } else if (val == 8.7) {
+                var ironNeeded = "710";
+                var weeksTargetHb = "16";
+            } else if (val == 8.8) {
+                var ironNeeded = "690";
+                var weeksTargetHb = "16";
+            } else if (val == 8.9) {
+                var ironNeeded = "670";
+                var weeksTargetHb = "12";
+            } else if (val == 9) {
+                var ironNeeded = "650";
+                var weeksTargetHb = "12";
+            } else if (val == 9.1) {
+                var ironNeeded = "630";
+                var weeksTargetHb = "12";
+            } else if (val == 9.2) {
+                var ironNeeded = "610";
+                var weeksTargetHb = "12";
+            } else if (val == 9.3) {
+                var ironNeeded = "590";
+                var weeksTargetHb = "12";
+            } else if (val == 9.4) {
+                var ironNeeded = "570";
+                var weeksTargetHb = "8";
+            } else if (val == 9.5) {
+                var ironNeeded = "550";
+                var weeksTargetHb = "8";
+            } else if (val == 9.6) {
+                var ironNeeded = "510";
+                var weeksTargetHb = "8";
+            } else if (val == 9.7) {
+                var ironNeeded = "470";
+                var weeksTargetHb = "8";
+            } else if (val == 9.8) {
+                var ironNeeded = "430";
+                var weeksTargetHb = "8";
+            } else if (val == 9.9) {
+                var ironNeeded = "390";
+                var weeksTargetHb = "8";
+            } else if (val == 10) {
+                var ironNeeded = "350";
+                var weeksTargetHb = "8";
+            } else if (val == 10.1) {
+                var ironNeeded = "340";
+                var weeksTargetHb = "8";
+            } else if (val == 10.2) {
+                var ironNeeded = "330";
+                var weeksTargetHb = "8";
+            } else if (val == 10.3) {
+                var ironNeeded = "320";
+                var weeksTargetHb = "8";
+            } else if (val == 10.4) {
+                var ironNeeded = "310";
+                var weeksTargetHb = "8";
+            } else if (val == 10.5) {
+                var ironNeeded = "300";
+                var weeksTargetHb = "8";
+            } else if (val == 10.6) {
+                var ironNeeded = "290";
+                var weeksTargetHb = "8";
+            } else if (val == 10.7) {
+                var ironNeeded = "280";
+                var weeksTargetHb = "8";
+            } else if (val == 10.8) {
+                var ironNeeded = "270";
+                var weeksTargetHb = "8";
+            } else if (val == 10.9) {
+                var ironNeeded = "260";
+                var weeksTargetHb = "4";
+            } else if (val == 11) {
+                var ironNeeded = "250";
+                var weeksTargetHb = "4";
+            } else if (val == 11.1) {
+                var ironNeeded = "230";
+                var weeksTargetHb = "4";
+            } else if (val == 11.2) {
+                var ironNeeded = "210";
+                var weeksTargetHb = "4";
+            } else if (val == 11.3) {
+                var ironNeeded = "190";
+                var weeksTargetHb = "4";
+            } else if (val == 11.4) {
+                var ironNeeded = "170";
+                var weeksTargetHb = "4";
+            } else if (val == 11.5) {
+                var ironNeeded = "150";
+                var weeksTargetHb = "4";
+            } else if (val == 11.6) {
+                var ironNeeded = "120";
+                var weeksTargetHb = "4";
+            } else if (val == 11.7) {
+                var ironNeeded = "90";
+                var weeksTargetHb = "4";
+            } else if (val == 11.8) {
+                var ironNeeded = "60";
+                var weeksTargetHb = "4";
+            } else if (val == 11.9) {
+                var ironNeeded = "30";
+                var weeksTargetHb = "4";
+            } else if (val == 12) {
+                var ironNeeded = "0";
+                var weeksTargetHb = "0";
+            } else {
+                var ironNeeded = "N/A";
+                var weeksTargetHb = "N/A";
+            }
+
+            if (val >= 7.1 && val <= 7.9) {
+                $("#hbbanner").text("Prescriber judgment necessary to determine appropriateness of oral iron therapy for Hb below 8g/dl.").show('slow');
+            } else {
+                $("#hbbanner").text("").hide('slow');
+            }
+            
+            
+            
+            
+        }
+
+    $("#ironNeeded").text(ironNeeded);
+    $("#weeksTargetHb").val(weeksTargetHb);
+        
+        
+        var val2 = $('.ferritin').val();
+    
+    if (val2 == 0) {
+        var ironNeeded2 = "400";
+        var weeksIronStores = "12";
+    } else if (val2 == 1) {
+        var ironNeeded2 = "395";
+        var weeksIronStores = "12";
+    } else if (val2 == 2) {
+        var ironNeeded2 = "390";
+        var weeksIronStores = "12";
+    } else if (val2 == 3) {
+        var ironNeeded2 = "385";
+        var weeksIronStores = "12";
+    } else if (val2 == 4) {
+        var ironNeeded2 = "380";
+        var weeksIronStores = "12";
+    } else if (val2 == 5) {
+        var ironNeeded2 = "375";
+        var weeksIronStores = "12";
+    } else if (val2 == 6) {
+        var ironNeeded2 = "370";
+        var weeksIronStores = "8";
+    } else if (val2 == 7) {
+        var ironNeeded2 = "365";
+        var weeksIronStores = "8";
+    } else if (val2 == 8) {
+        var ironNeeded2 = "360";
+        var weeksIronStores = "8";
+    } else if (val2 == 9) {
+        var ironNeeded2 = "355";
+        var weeksIronStores = "8";
+    } else if (val2 == 10) {
+        var ironNeeded2 = "350";
+        var weeksIronStores = "8";
+    } else if (val2 == 11) {
+        var ironNeeded2 = "345";
+        var weeksIronStores = "8";
+    } else if (val2 == 12) {
+        var ironNeeded2 = "340";
+        var weeksIronStores = "8";
+    } else if (val2 == 13) {
+        var ironNeeded2 = "335";
+        var weeksIronStores = "8";
+    } else if (val2 == 14) {
+        var ironNeeded2 = "330";
+        var weeksIronStores = "8";
+    } else if (val2 == 15) {
+        var ironNeeded2 = "325";
+        var weeksIronStores = "8";
+    } else if (val2 == 16) {
+        var ironNeeded2 = "315";
+        var weeksIronStores = "8";
+    } else if (val2 == 17) {
+        var ironNeeded2 = "305";
+        var weeksIronStores = "8";
+    } else if (val2 == 18) {
+        var ironNeeded2 = "295";
+        var weeksIronStores = "8";
+    } else if (val2 == 19) {
+        var ironNeeded2 = "285";
+        var weeksIronStores = "8";
+    } else if (val2 == 20) {
+        var ironNeeded2 = "275";
+        var weeksIronStores = "8";
+    } else if (val2 == 21) {
+        var ironNeeded2 = "265";
+        var weeksIronStores = "4";
+    } else if (val2 == 22) {
+        var ironNeeded2 = "255";
+        var weeksIronStores = "4";
+    } else if (val2 == 23) {
+        var ironNeeded2 = "245";
+        var weeksIronStores = "4";
+    } else if (val2 == 24) {
+        var ironNeeded2 = "235";
+        var weeksIronStores = "4";
+    } else if (val2 == 25) {
+        var ironNeeded2 = "225";
+        var weeksIronStores = "4";
+    } else if (val2 == 26) {
+        var ironNeeded2 = "215";
+        var weeksIronStores = "4";
+    } else if (val2 == 27) {
+        var ironNeeded2 = "205";
+        var weeksIronStores = "4";
+    } else if (val2 == 28) {
+        var ironNeeded2 = "195";
+        var weeksIronStores = "4";
+    } else if (val2 == 29) {
+        var ironNeeded2 = "185";
+        var weeksIronStores = "4";
+    } else if (val2 == 30) {
+        var ironNeeded2 = "175";
+        var weeksIronStores = "4";
+    } else if (val2 == 31) {
+        var ironNeeded2 = "160";
+        var weeksIronStores = "4";
+    } else if (val2 == 32) {
+        var ironNeeded2 = "145";
+        var weeksIronStores = "4";
+    } else if (val2 == 33) {
+        var ironNeeded2 = "130";
+        var weeksIronStores = "4";
+    } else if (val2 == 34) {
+        var ironNeeded2 = "115";
+        var weeksIronStores = "4";
+    } else if (val2 == 35) {
+        var ironNeeded2 = "100";
+        var weeksIronStores = "4";
+    } else if (val2 == 36) {
+        var ironNeeded2 = "90";
+        var weeksIronStores = "0";
+    } else if (val2 == 37) {
+        var ironNeeded2 = "80";
+        var weeksIronStores = "0";
+    } else if (val2 == 38) {
+        var ironNeeded2 = "70";
+        var weeksIronStores = "0";
+    } else if (val2 == 39) {
+        var ironNeeded2 = "60";
+        var weeksIronStores = "0";
+    } else if (val2 == 40) {
+        var ironNeeded2 = "50";
+        var weeksIronStores = "0";
+    } else if (val2 == 41) {
+        var ironNeeded2 = "40";
+        var weeksIronStores = "0";
+    } else if (val2 == 42) {
+        var ironNeeded2 = "30";
+        var weeksIronStores = "0";
+    } else if (val2 == 43) {
+        var ironNeeded2 = "20";
+        var weeksIronStores = "0";
+    } else if (val2 == 44) {
+        var ironNeeded2 = "10";
+        var weeksIronStores = "0";
+    } else if (val2 == 45) {
+        var ironNeeded2 = "0";
+        var weeksIronStores = "0";
+    } else if (val2 == 46) {
+        var ironNeeded2 = "0";
+        var weeksIronStores = "0";
+    } else if (val2 == 47) {
+        var ironNeeded2 = "0";
+        var weeksIronStores = "0";
+    } else if (val2 == 48) {
+        var ironNeeded2 = "0";
+        var weeksIronStores = "0";
+    } else if (val2 == 49) {
+        var ironNeeded2 = "0";
+        var weeksIronStores = "0";
+    } else if (val2 == 50) {
+        var ironNeeded2 = "0";
+        var weeksIronStores = "0";
+    } else {
+        var ironNeeded2 = "N/A";
+        var weeksIronStores = "N/A";
+    }
+        
+        if (val2 == "" || val2.length == 0) {
+            $("#ferbanner").text("Measuring a ferritin level is very helpful for guiding iron therapy. In absence of ferritin level, an addition 1-2 months or 4-6 weeks) of iron therapy is recommended to ensure iron store repletion.").show('slow');
+        } else {
+            $("#ferbanner").text("").hide('slow');
+        }
+        
+$("#ironNeeded2").text(ironNeeded2); 
+$("#weeksIronStores").val(weeksIronStores);  
+        
+        var weeks1 = parseInt(weeksTargetHb);
+        var weeks2 = parseInt(weeksIronStores);
+        var months = Math.floor((weeks1 + weeks2) / 4);
+        var weeks3 = (weeks1 + weeks2) % 4;
+        
+        /*var months = (weeks1 + weeks2) / 4;*/
+        var weeks4 = weeks1 + weeks2;
+        
+        if (months >= 1) {
+            var presc = "1";
+        }
+        
+        if (weeks3 > 1) {
+            var refills2 = 1;
+        } else {
+            var refills2 = 0;
+        }
+        
+        var refills1 = months - presc;
+        
+        var total_refills = refills1 + refills2;
+        
+        var total_therapy = weeks4 + " weeks ( " + months + " months + " + weeks3 + " weeks )";
+        $("#total_therapy").val(total_therapy);
+        
+        $("#prescriptions").val(presc); 
+        $("#refills").val(total_refills);
+        
+        /*$("#months").val(months); 
+        $("#weeks3").val(weeks3); */
+        
+        if (val >= 7.1) {
+                $('.computation').show('slow');
+            }  else {
+                $('.computation').hide('slow');
+            }  
+        
+        
+    });
+    
+   
+</script>
+
+
+
+
